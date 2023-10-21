@@ -1,0 +1,6 @@
+steps:
+    build:
+        image: debian
+        commands:
+            - apt-get -y openjdk-11-jdk-headless maven
+            - mvn clean package
