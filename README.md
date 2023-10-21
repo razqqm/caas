@@ -1,7 +1,7 @@
 <p align="center"><img width=12.5% src="https://codeberg.org/iNPUTmice/caas/raw/branch/master/caas-web/src/main/resources/public/icons/android-chrome-192x192.png"></p>
 <h1 align="center">XMPP Compliance Tester</h1>
 
-[![Build Status](https://travis-ci.org/iNPUTmice/caas.svg?branch=master)](https://travis-ci.org/iNPUTmice/caas)
+[![Build Status](https://ci.codeberg.org/api/badges/12723/status.svg)](https://ci.codeberg.org/repos/12723)
 
 This is a web service for checking and visualising compliance status of XMPP servers, made as a part of [Google Summer of Code 2018](https://summerofcode.withgoogle.com/projects/#5341326460059648) for Conversations.im by Rishi Raj.
 ## Why compliance?
