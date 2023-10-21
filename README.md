@@ -1,6 +1,5 @@
-<p align="center"><img width=12.5% src="https://github.com/iNPUTmice/caas/blob/master/caas-web/src/main/resources/public/icons/android-chrome-192x192.png"></p>
+<p align="center"><img width=12.5% src="https://codeberg.org/iNPUTmice/caas/raw/branch/master/caas-web/src/main/resources/public/icons/android-chrome-192x192.png"></p>
 <h1 align="center">XMPP Compliance Tester</h1>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 [![Build Status](https://travis-ci.org/iNPUTmice/caas.svg?branch=master)](https://travis-ci.org/iNPUTmice/caas)
 
@@ -22,7 +21,7 @@ Alternatively, you can run the project in these ways:-
 
 ## Build instructions
 
-You need to have Java 10+ and [maven](https://maven.apache.org/)
+You need to have Java 11+ and [maven](https://maven.apache.org/)
 
 To build both the command line tool and web service, simply run
 ```
