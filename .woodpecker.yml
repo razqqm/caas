@@ -1,0 +1,7 @@
+steps:
+    build:
+        image: debian
+        commands:
+            - apt-get update
+            - apt-get -y install openjdk-17-jdk-headless maven
+            - mvn clean package
