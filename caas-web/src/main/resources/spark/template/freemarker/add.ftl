@@ -30,7 +30,7 @@
     </form>
     <div class="note">
          <p style="color:red;">Note: Don't use a personal or privileged account for testing servers, as the credentials will be stored on our database.</p>
-        If you just want to test your server locally, you can alternatively build the command line tool provided in the <a href='https://github.com/iNPUTmice/caas'>repository</a>.
+        If you just want to test your server locally, you can alternatively build the command line tool provided in the <a href='https://codeberg.org/iNPUTmice/caas'>repository</a>.
     </div>
     <#assign footerText="<br/>" in page>
 </@page.page>
