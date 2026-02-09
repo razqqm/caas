@@ -43,7 +43,7 @@ public class MamMuc extends AbstractTest {
         try {
             List<ChatService> chatServices =
                     multiUserChatManager.discoverChatServices().getResult();
-            if (chatServices.size() < 1) {
+            if (chatServices.isEmpty()) {
                 LOGGER.debug("Unable to find a MUC service");
                 return false;
             }
