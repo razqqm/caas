@@ -5,6 +5,8 @@ import im.conversations.compliance.pojo.Configuration;
 import im.conversations.compliance.pojo.Result;
 import im.conversations.compliance.xmpp.utils.TestUtils;
 import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -93,18 +95,18 @@ public class WebUtils {
 
     public static boolean isConnected() {
         for (String ip : WELL_KNOWN_PING_TARGETS) {
-            if (ping(ip)) {
+            if (tcpReachable(ip, 53, 3000)) {
                 return true;
             }
         }
         return false;
     }
 
-    private static boolean ping(String ip) {
-        try {
-            Process ping = Runtime.getRuntime().exec("ping -c 1 " + ip);
-            return ping.waitFor() == 0;
-        } catch (IOException | InterruptedException e) {
+    private static boolean tcpReachable(String host, int port, int timeoutMs) {
+        try (Socket socket = new Socket()) {
+            socket.connect(new InetSocketAddress(host, port), timeoutMs);
+            return true;
+        } catch (IOException e) {
             return false;
         }
     }

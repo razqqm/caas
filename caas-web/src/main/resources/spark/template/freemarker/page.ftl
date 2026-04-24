@@ -94,10 +94,8 @@
 <footer>
     <small>
         &copy; 2026 <a href="https://ilia.ae">Ilia Arestov</a>.
-        Fork of <a href="https://codeberg.org/iNPUTmice/caas">caas</a>
-        (&copy; 2018 <a href="https://gultsch.de/">Daniel Gultsch</a>,
-        <a href="https://rishiraj.me">Rishi Raj</a>),
-        <a href="https://opensource.org/license/bsd-3-clause">BSD-3-Clause</a>.
+        Based on <a href="https://codeberg.org/iNPUTmice/caas">caas</a>
+        &copy; 2018 Gultsch &amp; Raj.
         ${footerText!}
     </small>
 </footer>
