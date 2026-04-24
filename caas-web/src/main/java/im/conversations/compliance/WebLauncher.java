@@ -73,23 +73,6 @@ public class WebLauncher {
                 templateEngine);
         get("/historic/iteration/:iteration/", Controller.getHistoricTable, templateEngine);
 
-        notFound(
-                (request, response) -> {
-                    response.type("text/html");
-                    Map<String, Object> model = new HashMap<>();
-                    model.put("error_code", 404);
-                    model.put("error_msg", I18n.t("error.not_found"));
-                    return templateEngine.render(new ModelAndView(model, "error.ftl"));
-                });
-        internalServerError(
-                (request, response) -> {
-                    response.type("text/html");
-                    Map<String, Object> model = new HashMap<>();
-                    model.put("error_code", 500);
-                    model.put("error_msg", I18n.t("error.internal"));
-                    return templateEngine.render(new ModelAndView(model, "error.ftl"));
-                });
-
         get("/api/compliant_servers/", Api.getCompliantServers);
         MailConfig mailConfig = Configuration.getInstance().getMailConfig();
         if (mailConfig != null) {
@@ -107,5 +90,20 @@ public class WebLauncher {
         DBOperations.init();
         PeriodicTestRunner.getInstance();
         Help.getInstance();
+
+        spark.Route notFoundRoute =
+                (request, response) -> {
+                    response.status(404);
+                    response.type("text/html");
+                    Map<String, Object> model = new HashMap<>();
+                    model.put("error_code", 404);
+                    model.put("error_msg", I18n.t("error.not_found"));
+                    return templateEngine.render(new ModelAndView(model, "error.ftl"));
+                };
+        get("/*", notFoundRoute);
+        get("/:a/:b", notFoundRoute);
+        get("/:a/:b/:c", notFoundRoute);
+        get("/:a/:b/:c/:d", notFoundRoute);
+        get("/:a/:b/:c/:d/:e", notFoundRoute);
     }
 }
