@@ -12,6 +12,7 @@ import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import spark.Request;
+import spark.Response;
 
 public final class I18n implements TemplateMethodModelEx {
 
@@ -53,8 +54,30 @@ public final class I18n implements TemplateMethodModelEx {
         CURRENT_LOCALE.remove();
     }
 
-    public static Locale resolveFrom(Request request) {
-        String header = request == null ? null : request.headers("Accept-Language");
+    public static String currentLanguage() {
+        return CURRENT_LOCALE.get().getLanguage();
+    }
+
+    private static boolean isSupported(String tag) {
+        return "en".equals(tag) || "ru".equals(tag);
+    }
+
+    public static Locale resolveFrom(Request request, Response response) {
+        if (request == null) {
+            return DEFAULT_LOCALE;
+        }
+        String queryLang = request.queryParams("lang");
+        if (queryLang != null && isSupported(queryLang)) {
+            if (response != null) {
+                response.cookie("/", "lang", queryLang, 60 * 60 * 24 * 365, false, false);
+            }
+            return new Locale(queryLang);
+        }
+        String cookieLang = request.cookie("lang");
+        if (cookieLang != null && isSupported(cookieLang)) {
+            return new Locale(cookieLang);
+        }
+        String header = request.headers("Accept-Language");
         if (header == null || header.isEmpty()) {
             return DEFAULT_LOCALE;
         }

@@ -19,6 +19,7 @@ public class I18nFreemarkerEngine extends FreeMarkerEngine {
             newModel = new HashMap<>();
         }
         newModel.putIfAbsent("i18n", I18n.INSTANCE);
+        newModel.putIfAbsent("lang", I18n.currentLanguage());
         return super.render(new ModelAndView(newModel, modelAndView.getViewName()));
     }
 }

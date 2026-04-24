@@ -13,8 +13,8 @@
     <meta property="og:image" content="${root_url}/img/cover.png">
     </#if>
     <meta name="twitter:creator" content="@iNPUTmice">
-    <meta property="og:description" content="${description!default_description}">
-    <meta property="og:locale" content="en_US">
+    <meta property="og:description" content="${description!i18n('meta.description')}">
+    <meta property="og:locale" content="${lang!'en'}">
     <meta charset="UTF-8">
     <style>
         #nav_bar, #brand, #nav_list_menu {
@@ -74,18 +74,22 @@
         <span></span>
     </div>
     <div id="nav_list_menu" onclick="menu_toggle()">
-        <a href="/add">
-            Add a server
+        <a href="/add/">
+            ${i18n("nav.add_server")}
         </a>
         <a href="/">
-            Servers
+            ${i18n("nav.servers")}
         </a>
         <a href="/tests/">
-            Tests
+            ${i18n("nav.tests")}
         </a>
         <a href="/about/">
-            About
+            ${i18n("nav.about")}
         </a>
+        <span id="lang_switch">
+            <a href="?lang=en" class="lang_link <#if lang == 'en'>active</#if>">EN</a>
+            <a href="?lang=ru" class="lang_link <#if lang == 'ru'>active</#if>">RU</a>
+        </span>
     </div>
 </nav>
 <div id="content">

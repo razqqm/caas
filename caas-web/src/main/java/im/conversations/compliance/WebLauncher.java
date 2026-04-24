@@ -48,7 +48,7 @@ public class WebLauncher {
         port(Configuration.getInstance().getPort());
         before(
                 (request, response) -> {
-                    I18n.setCurrent(I18n.resolveFrom(request));
+                    I18n.setCurrent(I18n.resolveFrom(request, response));
                     if (!request.pathInfo().endsWith("/")) {
                         response.redirect(request.pathInfo() + "/");
                     }

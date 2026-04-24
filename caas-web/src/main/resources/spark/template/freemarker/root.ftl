@@ -3,11 +3,11 @@
 <#import "includes/table.ftl" as table>
 <#assign scripts=["/js/vue.min.js","/js/search_bar.js"] in page>
 <#assign stylesheets=["/css/search_bar.css"] in page>
-<#assign description="Pick and choose your Jabber server from a list of compatible servers or check if your current server supports all required features." in page>
+<#assign description=i18n("meta.description") in page>
 <#assign title="Server overview &middot; ${page.project_name}" in page>
-<#assign no_results_found_msg="No results found. <a href='/add'>Add</a> credentials for some XMPP servers to get started">
+<#assign no_results_found_msg=i18n("home.no_results")>
 <@page.page>
-    <h1>Check your server for compliance</h1>
+    <h1>${i18n("home.heading")}</h1>
     <div id="search_box">
         <div id="search_submit" @click="enter">Go</div>
         <div id="search_suggestion_box">
@@ -23,7 +23,7 @@
     </div>
     <#if recommendations?has_content>
         <div id="recommended_servers">
-        <h3>Randomly suggested compliant servers</h3>
+        <h3>${i18n("home.suggested")}</h3>
         <#list recommendations as recommendation>
             <div class="chip clickable" onclick="location.href='/server/${recommendation}'">
             ${recommendation}

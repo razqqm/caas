@@ -381,3 +381,29 @@ footer {
         transform: rotate(360deg);
     }
 }
+
+#lang_switch {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 12px;
+    padding: 0 8px;
+    gap: 6px;
+    font-size: 0.85em;
+    opacity: 0.75;
+}
+
+#lang_switch .lang_link {
+    padding: 4px 6px;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
+#lang_switch .lang_link.active {
+    opacity: 1;
+    font-weight: bold;
+    background: rgba(0,0,0,0.06);
+}
+
+#lang_switch .lang_link:hover {
+    opacity: 1;
+}
