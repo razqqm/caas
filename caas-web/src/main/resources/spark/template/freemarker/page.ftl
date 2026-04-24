@@ -93,9 +93,8 @@
 </div>
 <footer>
     <small>
-        &copy; 2026 <a href="https://ilia.ae">Ilia Arestov</a>.
-        Based on <a href="https://codeberg.org/iNPUTmice/caas">caas</a>
-        &copy; 2018 Gultsch &amp; Raj.
+        ${i18n("footer.copyright")}
+        ${i18n("footer.based_on")}
         ${footerText!}
     </small>
 </footer>

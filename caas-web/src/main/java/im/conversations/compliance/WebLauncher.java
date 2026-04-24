@@ -3,6 +3,8 @@ package im.conversations.compliance;
 import static spark.Spark.*;
 
 import im.conversations.compliance.email.MailBuilder;
+import im.conversations.compliance.i18n.I18n;
+import im.conversations.compliance.i18n.I18nFreemarkerEngine;
 import im.conversations.compliance.persistence.DBConnections;
 import im.conversations.compliance.persistence.DBOperations;
 import im.conversations.compliance.pojo.Configuration;
@@ -16,7 +18,6 @@ import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.TemplateEngine;
-import spark.template.freemarker.FreeMarkerEngine;
 
 public class WebLauncher {
 
@@ -40,17 +41,19 @@ public class WebLauncher {
 
     private static void start() {
 
-        TemplateEngine templateEngine = new FreeMarkerEngine();
+        TemplateEngine templateEngine = new I18nFreemarkerEngine();
         staticFileLocation("/public");
         webSocket("/socket/*", TestLiveWebsocket.class);
         ipAddress(Configuration.getInstance().getIp());
         port(Configuration.getInstance().getPort());
         before(
                 (request, response) -> {
+                    I18n.setCurrent(I18n.resolveFrom(request));
                     if (!request.pathInfo().endsWith("/")) {
                         response.redirect(request.pathInfo() + "/");
                     }
                 });
+        after((request, response) -> I18n.clear());
         get("/", Controller.getRoot, templateEngine);
         get("/old/", Controller.getOld, templateEngine);
         get("/tests/", Controller.getTests, templateEngine);
