@@ -14,9 +14,12 @@ import im.conversations.compliance.web.Api;
 import im.conversations.compliance.web.Controller;
 import im.conversations.compliance.web.TestLiveWebsocket;
 import im.conversations.compliance.xmpp.PeriodicTestRunner;
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import spark.ModelAndView;
 import spark.TemplateEngine;
 
 public class WebLauncher {
@@ -69,6 +72,23 @@ public class WebLauncher {
                 Controller.getHistoricForServer,
                 templateEngine);
         get("/historic/iteration/:iteration/", Controller.getHistoricTable, templateEngine);
+
+        notFound(
+                (request, response) -> {
+                    response.type("text/html");
+                    Map<String, Object> model = new HashMap<>();
+                    model.put("error_code", 404);
+                    model.put("error_msg", I18n.t("error.not_found"));
+                    return templateEngine.render(new ModelAndView(model, "error.ftl"));
+                });
+        internalServerError(
+                (request, response) -> {
+                    response.type("text/html");
+                    Map<String, Object> model = new HashMap<>();
+                    model.put("error_code", 500);
+                    model.put("error_msg", I18n.t("error.internal"));
+                    return templateEngine.render(new ModelAndView(model, "error.ftl"));
+                });
 
         get("/api/compliant_servers/", Api.getCompliantServers);
         MailConfig mailConfig = Configuration.getInstance().getMailConfig();

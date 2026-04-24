@@ -58,6 +58,19 @@ public final class I18n implements TemplateMethodModelEx {
         return CURRENT_LOCALE.get().getLanguage();
     }
 
+    public static String t(String key) {
+        try {
+            ResourceBundle bundle =
+                    ResourceBundle.getBundle(BUNDLE_BASE, CURRENT_LOCALE.get(), UTF8_CONTROL);
+            if (bundle.containsKey(key)) {
+                return bundle.getString(key);
+            }
+        } catch (Exception ignored) {
+            // fall through
+        }
+        return key;
+    }
+
     private static boolean isSupported(String tag) {
         return "en".equals(tag) || "ru".equals(tag);
     }
