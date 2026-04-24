@@ -23,10 +23,9 @@
 
         <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="110">
             <a xlink:href="${resultLink!}">
-                <text x="935" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)">XMPP
-                    Specifications compliance
+                <text x="935" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)">${i18n("badge.compliance")}
                 </text>
-                <text x="935" y="140" transform="scale(.1)">XMPP Specifications compliance
+                <text x="935" y="140" transform="scale(.1)">${i18n("badge.compliance")}
                 </text>
             </a>
             <#if pass?exists>
@@ -40,10 +39,10 @@
             </a>
             <#else>
                  <text x="2255" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)">
-                     Unavailable
+                     ${i18n("badge.unavailable")}
                  </text>
                 <text x="2255" y="140" transform="scale(.1)">
-                    Unavailable
+                    ${i18n("badge.unavailable")}
                 </text>
             </#if>
         </g>

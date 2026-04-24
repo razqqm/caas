@@ -3,8 +3,8 @@
 <#import "includes/graph.ftl" as graph>
 <#import "includes/stat.ftl" as stat>
 <#import "includes/result.ftl" as result>
-<#assign description="Check list of features supported by ${domain}, it's historic results and subscribe to alerts about ${domain}'s results" in page>
-<#assign title="${domain}'s compliance result | ${page.project_name}" in page>
+<#assign description=i18n("server.meta_description", domain) in page>
+<#assign title=i18n("server.title", domain, page.project_name) in page>
 <#assign stylesheets=["/css/server.css","/css/graph.css","/css/stat.css"] in page>
 <#assign scripts=["/js/graph.js","/js/subscribe.js","/js/d3.min.js","/js/server.js"] in page>
 
@@ -16,18 +16,17 @@
         var timestamp = "${timestamp}";
     </script>
 
-    <h2> Compliance status for <a href="http://${domain}">${domain}</a></h2>
+    <h2>${i18n("server.heading")} <a href="http://${domain}">${domain}</a></h2>
 
     <@stat.stat></@stat.stat>
 
-   <button id="download_report" onclick="print_report('${softwareName!}','${softwareVersion!}')">Download report
-   </button>
+   <button id="download_report" onclick="print_report('${softwareName!}','${softwareVersion!}')">${i18n("server.download_report")}</button>
     <br><br>
 
     <#if softwareName??>
-        Server is running ${softwareName} ${softwareVersion!}
+        ${i18n("server.running")} ${softwareName} ${softwareVersion!}
     <#else>
-        Server is running unknown software
+        ${i18n("server.running_unknown")}
     </#if>
 
     <br><br>
@@ -39,14 +38,13 @@
     </@result.result>
 
     <div id="server_run">
-        Tests last ran ${timeSince}<br>
-        <button onclick="location.href='/live/${domain}'">Rerun tests</button>
+        ${i18n("server.tests_last_ran")} ${timeSince}<br>
+        <button onclick="location.href='/live/${domain}/'">${i18n("server.rerun")}</button>
     </div>
 
     <#if helps??>
     <p>
-        NOTE: If you are the server admin/maintainer, click on the failing tests to get some help for passing those
-        tests
+        ${i18n("server.admin_note")}
     </p>
     </#if>
 
@@ -54,26 +52,26 @@
 
         <#if mailExists>
         <div class="card" id="subscribe_server">
-            <h3>Subscribe to periodic reports for this server</h3>
+            <h3>${i18n("server.subscribe.heading")}</h3>
             <form id="form_subscribe" action="#subscribe" method="post">
                 <div>
-                    <label for="email" class="input_label_subscribe">E-Mail</label>
+                    <label for="email" class="input_label_subscribe">${i18n("server.subscribe.email")}</label>
                     <input id="email" name="email" class="input_subscribe" type="text"/>
                 </div>
                 <div id="loading_subscribe">
                     <div class="loader"></div>
-                    <div>Subscribing to results for ${domain}</div>
+                    <div>${i18n("server.subscribe.loading")} ${domain}</div>
                 </div>
                 <div id="input_msg"></div>
                 <div>
-                    <input type="submit" class="button" id="subscribe_button" value="Subscribe"/>
+                    <input type="submit" class="button" id="subscribe_button" value="${i18n("server.subscribe.button")}"/>
                 </div>
             </form>
         </div>
         </#if>
 
         <div class="card" id="embed_server">
-            <h3>Add badge to your website</h3>
+            <h3>${i18n("server.badge.heading")}</h3>
             ${badgeCode?no_esc}
             <br><br>
             <div class="code">
@@ -87,11 +85,10 @@
         <#list helps as test,help>
             <div class="card help" id="${test}">
                 <a class="close" href="#${test}">&times;</a>
-                <h3>For <a href="/test/${test}">${tests[test].full_name()}</a>* :</h3>
+                <h3>${i18n("server.help.for")} <a href="/test/${test}">${tests[test].full_name()}</a>* :</h3>
                 ${help?no_esc}
                 <p class="footnote">
-                    Note: These instructions are valid only for this particular server,
-                    because of the software running on it.
+                    ${i18n("server.help.footnote")}
                 </p>
             </div>
         </#list>

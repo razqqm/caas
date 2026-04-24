@@ -1,10 +1,10 @@
 <#ftl output_format="HTML">
 <#import "page.ftl" as page>
-<#assign description="Check compliance status for XMPP extensions and features across servers, along with information about those features" in page>
-<#assign title="Compliance status for tests across servers | ${page.project_name}" in page>
+<#assign description=i18n("tests.meta_description") in page>
+<#assign title=i18n("tests.title", page.project_name) in page>
 <#assign stylesheets=["/css/tests.css"] in page>
 <@page.page>
-    <h2>Compliance tests</h2>
+    <h2>${i18n("tests.heading.compliance")}</h2>
     <div class="tests_container">
     <#list tests as test>
         <div class="test card">
@@ -24,7 +24,7 @@
     </#list>
 
     </div>
-    <h2>Informational tests</h2>
+    <h2>${i18n("tests.heading.informational")}</h2>
     <div class="tests_container">
      <#list informationalTests as test>
         <div class="test card">

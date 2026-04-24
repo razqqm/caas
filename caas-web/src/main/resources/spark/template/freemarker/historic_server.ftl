@@ -1,15 +1,15 @@
 <#ftl output_format="HTML">
 <#import "page.ftl" as page>
 <#import "includes/result.ftl" as result>
-<#assign title="Historic test result #${iteration.getIterationNumber()} for ${domain} | ${page.project_name}" in page>
+<#assign title=i18n("historic_server.title", iteration.getIterationNumber()?c, domain, page.project_name) in page>
 <@page.page>
-    <h2>Test result #${iteration.getIterationNumber()} for ${domain}</h2>
-    <h3>Test ran ${timeSince} (from ${iteration.getBegin()} - ${iteration.getEnd()})</h3>
+    <h2>${i18n("historic_server.heading", iteration.getIterationNumber()?c, domain)}</h2>
+    <h3>${i18n("historic_server.ran", timeSince, iteration.getBegin()?string, iteration.getEnd()?string)}</h3>
     <@result.result>
     </@result.result>
-    <a href="/historic/iteration/${iteration.getIterationNumber()}">
+    <a href="/historic/iteration/${iteration.getIterationNumber()}/">
         <button>
-            See complete compliance table for test #${iteration.getIterationNumber()}
+            ${i18n("historic_server.see_full", iteration.getIterationNumber()?c)}
         </button>
     </a>
 </@page.page>

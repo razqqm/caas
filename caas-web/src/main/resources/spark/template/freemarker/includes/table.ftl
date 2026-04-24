@@ -16,8 +16,8 @@
         <table>
             <thead>
             <tr>
-                <th>Server</th>
-                <th>Compliance</th>
+                <th>${i18n("table.header.server")}</th>
+                <th>${i18n("table.header.compliance")}</th>
         <#list tests as test>
                 <th>
                     <a href="/test/${test.short_name()}">
@@ -56,7 +56,7 @@
         ¯\_(⊙︿⊙)_/¯
     </h2>
     <h3>
-        ${(no_results_found_msg??)?then(no_results_found_msg!,"No results found")}
+        <#if no_results_found_msg??>${no_results_found_msg?no_esc}<#else>${i18n("table.no_results_fallback")}</#if>
     </h3>
     </#if>
 </div>

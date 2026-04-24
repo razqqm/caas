@@ -1,6 +1,6 @@
 <#ftl output_format="HTML">
 <#macro result>
-<h3>Results</h3>
+<h3>${i18n("result.heading")}</h3>
 <div class="results_container">
     <#if results?size != 0>
     <#list results as result>
@@ -23,7 +23,7 @@
         </#if>
     </#list>
 </div>
-<h3>Results for informational tests</h3>
+<h3>${i18n("result.informational_heading")}</h3>
 <div class="results_container">
         <#list results as result>
             <#if result.getTest().informational()>
@@ -47,7 +47,7 @@
 </div>
     <#else>
     <h2 class="error_message">
-        Results unavailable for ${domain}
+        ${i18n("result.unavailable")} ${domain}
     </h2>
     </#if>
 </#macro>

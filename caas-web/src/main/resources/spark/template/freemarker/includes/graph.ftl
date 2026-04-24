@@ -2,7 +2,7 @@
 <#assign height=500>
 <#macro graph>
 
-    <noscript>Enable Javascript to see graphs</noscript>
+    <noscript>${i18n("graph.noscript")}</noscript>
     <div class="card" id="chart_container" height="${height + 20}px">
         <svg id="svg_container" shape-rendering="optimizeQuality" preserveAspectRatio="xMinYMin">
         </svg>
