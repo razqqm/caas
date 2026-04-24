@@ -5,6 +5,7 @@ import im.conversations.compliance.annotations.ComplianceTest;
 import im.conversations.compliance.email.MailBuilder;
 import im.conversations.compliance.email.MailSender;
 import im.conversations.compliance.email.MailVerification;
+import im.conversations.compliance.i18n.I18n;
 import im.conversations.compliance.persistence.DBOperations;
 import im.conversations.compliance.pojo.*;
 import im.conversations.compliance.utils.JsonReader;
@@ -177,16 +178,12 @@ public class Controller {
                 String domain = request.params("domain");
                 if (!OneOffTestRunner.runOneOffTestsFor(domain)) {
                     model.put("error_code", 404);
-                    String howToAdd =
-                            "You can add credentials by going to "
-                                    + WebUtils.getRootUrlFrom(request)
-                                    + "/add";
                     model.put(
                             "error_msg",
-                            "No credentials for "
-                                    + domain
-                                    + "  found in the database. "
-                                    + howToAdd);
+                            I18n.t(
+                                    "error.no_credentials",
+                                    domain,
+                                    WebUtils.getRootUrlFrom(request) + "/add/"));
                     return new ModelAndView(model, "error.ftl");
                 }
                 model.put("domain", domain);
@@ -200,15 +197,13 @@ public class Controller {
                 Server server = DBOperations.getServer(domain).orElse(null);
                 if (server == null) {
                     model.put("error_code", 404);
-                    model.put("error_msg", "Credentials unavailable for " + domain);
+                    model.put("error_msg", I18n.t("error.credentials_unavailable", domain));
                     return new ModelAndView(model, "error.ftl");
                 }
                 List<Result> results = DBOperations.getCurrentResultsForServer(domain);
                 if (results.isEmpty()) {
                     model.put("error_code", 404);
-                    model.put(
-                            "error_msg",
-                            "Results unavailable for " + domain + ". Tests might still be running");
+                    model.put("error_msg", I18n.t("error.results_unavailable_server", domain));
                     return new ModelAndView(model, "error.ftl");
                 }
                 List<String> failedTests =
@@ -249,7 +244,7 @@ public class Controller {
                 HashMap<String, Object> model = new HashMap<>();
                 if (test == null) {
                     model.put("error_code", 404);
-                    model.put("error_msg", "Test " + request.params("test") + " not found");
+                    model.put("error_msg", I18n.t("error.test_not_found", request.params("test")));
                     return new ModelAndView(model, "error.ftl");
                 }
                 model.put("test", test);
@@ -257,7 +252,9 @@ public class Controller {
 
                 if (results.isEmpty()) {
                     model.put("error_code", 404);
-                    model.put("error_msg", "Results unavailable for " + test.full_name());
+                    model.put(
+                            "error_msg",
+                            I18n.t("error.results_unavailable_test", test.full_name()));
                     return new ModelAndView(model, "error.ftl");
                 } else {
                     int passed =
@@ -307,7 +304,7 @@ public class Controller {
                     model.put("timeSince", TimeUtils.getTimeSince(iteration.getBegin()));
                 } catch (Exception ex) {
                     model.put("error_code", 404);
-                    model.put("error_msg", "ERROR: Invalid historical point requested");
+                    model.put("error_msg", I18n.t("error.invalid_historical"));
                     return new ModelAndView(model, "error.ftl");
                 }
                 Map<String, HashMap<String, Boolean>> resultsByServer =
@@ -327,7 +324,7 @@ public class Controller {
                     model.put("timeSince", TimeUtils.getTimeSince(iteration.getBegin()));
                 } catch (Exception ex) {
                     model.put("error_code", 404);
-                    model.put("error_msg", "ERROR: Invalid historical point requested");
+                    model.put("error_msg", I18n.t("error.invalid_historical"));
                     return new ModelAndView(model, "error.ftl");
                 }
                 String domain = request.params("domain");
