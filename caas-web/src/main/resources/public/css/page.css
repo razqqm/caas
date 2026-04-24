@@ -382,28 +382,34 @@ footer {
     }
 }
 
-#lang_switch {
+#nav_list_menu #lang_switch {
     display: inline-flex;
     align-items: center;
     margin-left: 12px;
-    padding: 0 8px;
-    gap: 6px;
+    gap: 4px;
+    height: 80px;
     font-size: 0.85em;
-    opacity: 0.75;
 }
 
-#lang_switch .lang_link {
-    padding: 4px 6px;
+#nav_list_menu #lang_switch .lang_link {
+    height: auto;
+    line-height: 1;
+    padding: 4px 8px;
+    font-size: 1em;
     text-decoration: none;
     border-radius: 3px;
+    background: transparent;
+    opacity: 0.7;
+    transition: background 150ms ease, opacity 150ms ease;
 }
 
-#lang_switch .lang_link.active {
-    opacity: 1;
+#nav_list_menu #lang_switch .lang_link.active {
+    background: rgba(0, 0, 0, 0.08);
     font-weight: bold;
-    background: rgba(0,0,0,0.06);
+    opacity: 1;
 }
 
-#lang_switch .lang_link:hover {
+#nav_list_menu #lang_switch .lang_link:hover {
+    background: rgba(0, 0, 0, 0.08);
     opacity: 1;
 }
